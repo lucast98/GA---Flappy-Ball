@@ -6,9 +6,10 @@ function Pipe() {
   this.x = width;
   this.w = 80;
   this.speed = 6;
-
+  this.passed = false;
   this.highlight = false;
 
+  /** Funcao que informa se o passaro bateu em um obstaculo ou nao */
   this.hits = function(bird) {
     if (bird.y < this.top || bird.y > height - this.bottom) {
       if (bird.x > this.x && bird.x < this.x + this.w) {
@@ -20,6 +21,16 @@ function Pipe() {
     return false;
   }
 
+  /** Funcao que informa se o passaro passou um obstaculo ou nao */
+  this.pass = function(bird) {
+    if (bird.x > this.x && !this.passed) {
+      this.passed = true;
+      return true;
+    }
+    return false;
+  }
+
+  /** Imprime um obstaculo na tela */
   this.show = function() {
     fill(255);
     if (this.highlight) {
@@ -29,10 +40,12 @@ function Pipe() {
     rect(this.x, height-this.bottom, this.w, this.bottom);
   }
 
+  /** Atualiza a velocidade dos canos */
   this.update = function() {
     this.x -= this.speed;
   }
 
+  /** Indica se o obstaculo esta na tela ou nao */
   this.offscreen = function() {
     if (this.x < -this.w) {
       return true;
