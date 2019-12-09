@@ -7,6 +7,8 @@ let counter = 0; /**Contador usado para gerar obstaculos */
 let slider; /** Objeto utilizado para acelerar a execucao */
 var score = 0; /** Pontuacao atual */
 var maxScore = 0; /** Pontuacao maxima */
+var gen = 0; /** Numero de geracoes */
+var genQtd = TOTAL;
 
 /*function preload(){
  // pipeBodySprite = loadImage('images/pipeNorth.png');
@@ -41,7 +43,8 @@ function draw() {
         if(pipes[i].hits(birds[j])){
           //console.log("...e morreu");
           savedBirds.push(birds.splice(j,1)[0]); /** mata os passaros que batem nos canos e os salvam em um novo array */
-        }   
+          genQtd--;
+        }
       }
   
       if (pipes[i].offscreen()) {
@@ -62,7 +65,6 @@ function draw() {
     }
   }
 
-
   background(0);
   showScores();
   for(let bird of birds){
@@ -79,6 +81,8 @@ function showScores() {
   maxScore = max(score, maxScore);
   text('Pontos: ' + score, 1, 32);
   text('Melhor pontuacao: ' + maxScore, 1, 64);
+  text('Geracao: ' + gen, 1, 96);
+  text('Qtd de passaros: ' + genQtd, 1, 128);
 }
 
 /** Reseta a pontuacao para 0 */

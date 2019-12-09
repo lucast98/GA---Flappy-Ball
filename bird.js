@@ -30,7 +30,7 @@ class Bird{
     this.velocity += this.lift;
   }
 
-  /** Faz uma mutação de 1% no passaro */
+  /** Faz uma mutação no passaro */
   mutate(){
     this.brain.mutate(0.1);
     //window.alert("oi");
@@ -53,7 +53,7 @@ class Bird{
     inputs[1] = closest.top / height; /** Altura do obstaculo superior mais proximo pela altura do canvas  */
     inputs[2] = closest.bottom / height; /** Altura do obstaculo inferior mais proximo pela altura do canvas */
     inputs[3] = closest.x / width; /** Posicao x do obstaculos mais proximo normalizado pela largura do canvas */
-    inputs[4] = this.velocity / 10; /**  */
+    inputs[4] = this.velocity / 10; /** Velocidade do passaro */
 
     let output = this.brain.predict(inputs); /** Saida da rede neural */
     if(output[0] > output[1]){
